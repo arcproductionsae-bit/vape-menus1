@@ -1,0 +1,1204 @@
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <style>
+                body {
+                  background-color: white; /* Ensure the iframe has a white background */
+                }
+
+                
+              </style>
+                        </head>
+                        <body>
+                            <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#667eea">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Vape Menu">
+<title>Vape Shop Digital Menu</title>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+-webkit-tap-highlight-color: transparent;
+}
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+min-height: 100vh;
+padding: 20px;
+touch-action: pan-y;
+}
+.container {
+max-width: 1400px;
+margin: 0 auto;
+}
+.header {
+text-align: center;
+color: white;
+margin-bottom: 30px;
+position: relative;
+}
+.header h1 {
+font-size: 42px;
+margin-bottom: 10px;
+text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+.header p {
+font-size: 18px;
+opacity: 0.9;
+}
+.admin-toggle {
+position: absolute;
+top: 10px;
+right: 10px;
+background: rgba(255,255,255,0.2);
+border: 2px solid white;
+color: white;
+padding: 12px 24px;
+border-radius: 8px;
+cursor: pointer;
+font-size: 16px;
+font-weight: bold;
+transition: all 0.3s;
+}
+.admin-toggle:hover {
+background: rgba(255,255,255,0.3);
+transform: scale(1.05);
+}
+.install-prompt {
+background: rgba(255,255,255,0.95);
+padding: 20px;
+border-radius: 12px;
+margin-bottom: 20px;
+text-align: center;
+box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+display: none;
+}
+.install-prompt.show {
+display: block;
+}
+.install-prompt h3 {
+color: #667eea;
+margin-bottom: 10px;
+}
+.install-prompt p {
+color: #666;
+margin-bottom: 15px;
+}
+.install-btn {
+background: #667eea;
+color: white;
+border: none;
+padding: 12px 30px;
+border-radius: 8px;
+font-size: 16px;
+font-weight: bold;
+cursor: pointer;
+margin-right: 10px;
+}
+.dismiss-btn {
+background: #e0e0e0;
+color: #666;
+border: none;
+padding: 12px 30px;
+border-radius: 8px;
+font-size: 16px;
+font-weight: bold;
+cursor: pointer;
+}
+.products-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 25px;
+margin-bottom: 30px;
+}
+.product-card {
+background: white;
+border-radius: 16px;
+padding: 25px;
+box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+transition: transform 0.3s;
+}
+.product-card:active {
+transform: scale(0.98);
+}
+.product-image {
+width: 100%;
+height: 200px;
+background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+border-radius: 12px;
+margin-bottom: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 64px;
+overflow: hidden;
+position: relative;
+}
+.product-image img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+border-radius: 12px;
+}
+.product-image-emoji {
+font-size: 64px;
+}
+.product-info {
+margin-bottom: 20px;
+}
+.product-name {
+font-size: 24px;
+font-weight: bold;
+color: #333;
+margin-bottom: 8px;
+}
+.product-price {
+font-size: 28px;
+color: #667eea;
+font-weight: bold;
+}
+.flavors-section {
+margin-bottom: 20px;
+}
+.flavors-label {
+font-size: 16px;
+font-weight: 600;
+color: #666;
+margin-bottom: 12px;
+}
+.flavors-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+gap: 10px;
+}
+.flavor-btn {
+padding: 14px 10px;
+border: 2px solid #667eea;
+background: white;
+border-radius: 8px;
+cursor: pointer;
+font-size: 14px;
+font-weight: 600;
+color: #667eea;
+transition: all 0.3s;
+text-align: center;
+min-height: 50px;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.flavor-btn:hover {
+background: #f0f4ff;
+}
+.flavor-btn.selected {
+background: #667eea;
+color: white;
+}
+.flavor-btn.out-of-stock {
+background: #f5f5f5;
+border-color: #ddd;
+color: #999;
+cursor: not-allowed;
+opacity: 0.6;
+}
+.flavor-btn.out-of-stock::after {
+content: " ✗";
+font-size: 12px;
+}
+.quantity-section {
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding-top: 20px;
+border-top: 2px solid #f0f0f0;
+}
+.quantity-label {
+font-size: 16px;
+font-weight: 600;
+color: #666;
+}
+.quantity-controls {
+display: flex;
+align-items: center;
+gap: 15px;
+}
+.qty-btn {
+width: 50px;
+height: 50px;
+border: none;
+background: #667eea;
+color: white;
+border-radius: 50%;
+font-size: 24px;
+font-weight: bold;
+cursor: pointer;
+transition: all 0.3s;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.qty-btn:active {
+transform: scale(0.9);
+background: #5568d3;
+}
+.qty-btn:disabled {
+background: #ddd;
+cursor: not-allowed;
+}
+.qty-display {
+font-size: 28px;
+font-weight: bold;
+color: #333;
+min-width: 50px;
+text-align: center;
+}
+.admin-panel {
+position: fixed;
+top: 0;
+left: -450px;
+width: 450px;
+height: 100vh;
+background: white;
+box-shadow: 4px 0 20px rgba(0,0,0,0.3);
+transition: left 0.3s;
+z-index: 1000;
+overflow-y: auto;
+padding: 20px;
+}
+.admin-panel.open {
+left: 0;
+}
+.admin-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 30px;
+padding-bottom: 20px;
+border-bottom: 2px solid #f0f0f0;
+}
+.admin-header h2 {
+font-size: 24px;
+color: #333;
+}
+.close-admin {
+background: #ff4757;
+color: white;
+border: none;
+padding: 10px 20px;
+border-radius: 6px;
+cursor: pointer;
+font-weight: bold;
+}
+.admin-actions {
+margin-bottom: 30px;
+}
+.add-product-btn {
+width: 100%;
+padding: 16px;
+background: #667eea;
+color: white;
+border: none;
+border-radius: 8px;
+font-size: 16px;
+font-weight: bold;
+cursor: pointer;
+transition: all 0.3s;
+}
+.add-product-btn:hover {
+background: #5568d3;
+transform: translateY(-2px);
+}
+.admin-product {
+margin-bottom: 30px;
+padding: 20px;
+background: #f8f9fa;
+border-radius: 12px;
+position: relative;
+}
+.admin-product h3 {
+font-size: 18px;
+color: #333;
+margin-bottom: 15px;
+}
+.admin-product-image {
+width: 60px;
+height: 60px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+margin-right: 10px;
+vertical-align: middle;
+border-radius: 8px;
+background: #f0f0f0;
+overflow: hidden;
+}
+.admin-product-image img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+.admin-product-image-emoji {
+font-size: 32px;
+}
+.delete-product-btn {
+position: absolute;
+top: 20px;
+right: 20px;
+background: #ff4757;
+color: white;
+border: none;
+padding: 6px 12px;
+border-radius: 6px;
+cursor: pointer;
+font-size: 12px;
+font-weight: bold;
+}
+.admin-flavor {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 12px;
+background: white;
+margin-bottom: 8px;
+border-radius: 8px;
+}
+.admin-flavor span {
+font-size: 14px;
+color: #666;
+}
+.flavor-actions {
+display: flex;
+gap: 8px;
+}
+.stock-toggle {
+padding: 8px 16px;
+border: none;
+border-radius: 6px;
+cursor: pointer;
+font-weight: bold;
+font-size: 12px;
+transition: all 0.3s;
+}
+.stock-toggle.in-stock {
+background: #2ecc71;
+color: white;
+}
+.stock-toggle.out-of-stock {
+background: #e74c3c;
+color: white;
+}
+.delete-flavor-btn {
+background: #ff6b81;
+color: white;
+border: none;
+padding: 8px 12px;
+border-radius: 6px;
+cursor: pointer;
+font-size: 12px;
+}
+.add-flavor-btn {
+width: 100%;
+padding: 10px;
+background: #3498db;
+color: white;
+border: none;
+border-radius: 6px;
+margin-top: 10px;
+cursor: pointer;
+font-weight: bold;
+}
+.overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0,0,0,0.5);
+z-index: 999;
+display: none;
+}
+.overlay.active {
+display: block;
+}
+.modal {
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background: white;
+padding: 30px;
+border-radius: 16px;
+box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+z-index: 1001;
+display: none;
+max-width: 500px;
+width: 90%;
+max-height: 80vh;
+overflow-y: auto;
+}
+.modal.active {
+display: block;
+}
+.modal h3 {
+font-size: 24px;
+margin-bottom: 20px;
+color: #333;
+}
+.form-group {
+margin-bottom: 20px;
+}
+.form-group label {
+display: block;
+font-size: 14px;
+font-weight: 600;
+color: #666;
+margin-bottom: 8px;
+}
+.form-group input {
+width: 100%;
+padding: 12px;
+border: 2px solid #e0e0e0;
+border-radius: 8px;
+font-size: 16px;
+transition: border 0.3s;
+}
+.form-group input:focus {
+outline: none;
+border-color: #667eea;
+}
+.image-upload-section {
+margin-top: 10px;
+}
+.image-choice-buttons {
+display: flex;
+gap: 10px;
+margin-bottom: 15px;
+}
+.choice-btn {
+flex: 1;
+padding: 12px;
+border: 2px solid #e0e0e0;
+background: white;
+border-radius: 8px;
+cursor: pointer;
+font-weight: 600;
+transition: all 0.3s;
+}
+.choice-btn.active {
+border-color: #667eea;
+background: #f0f4ff;
+color: #667eea;
+}
+.emoji-picker {
+display: grid;
+grid-template-columns: repeat(8, 1fr);
+gap: 8px;
+margin-top: 10px;
+}
+.emoji-option {
+font-size: 32px;
+padding: 8px;
+border: 2px solid #e0e0e0;
+border-radius: 8px;
+cursor: pointer;
+text-align: center;
+transition: all 0.3s;
+}
+.emoji-option:hover, .emoji-option.selected {
+border-color: #667eea;
+background: #f0f4ff;
+}
+.image-upload-area {
+border: 2px dashed #e0e0e0;
+border-radius: 8px;
+padding: 30px;
+text-align: center;
+cursor: pointer;
+transition: all 0.3s;
+margin-top: 10px;
+}
+.image-upload-area:hover {
+border-color: #667eea;
+background: #f0f4ff;
+}
+.image-upload-area.has-image {
+padding: 10px;
+border-color: #2ecc71;
+}
+.image-preview {
+max-width: 100%;
+max-height: 200px;
+border-radius: 8px;
+margin-top: 10px;
+}
+.upload-icon {
+font-size: 48px;
+margin-bottom: 10px;
+}
+.upload-text {
+color: #666;
+font-size: 14px;
+}
+input[type="file"] {
+display: none;
+}
+.modal-actions {
+display: flex;
+gap: 10px;
+margin-top: 20px;
+}
+.modal-btn {
+flex: 1;
+padding: 14px;
+border: none;
+border-radius: 8px;
+font-size: 16px;
+font-weight: bold;
+cursor: pointer;
+transition: all 0.3s;
+}
+.modal-btn.primary {
+background: #667eea;
+color: white;
+}
+.modal-btn.primary:hover {
+background: #5568d3;
+}
+.modal-btn.secondary {
+background: #e0e0e0;
+color: #666;
+}
+.modal-btn.secondary:hover {
+background: #d0d0d0;
+}
+.flavors-input-list {
+margin-top: 10px;
+}
+.flavor-input-row {
+display: flex;
+gap: 8px;
+margin-bottom: 8px;
+}
+.flavor-input-row input {
+flex: 1;
+}
+.remove-flavor-input {
+background: #ff4757;
+color: white;
+border: none;
+padding: 8px 12px;
+border-radius: 6px;
+cursor: pointer;
+}
+.add-flavor-input {
+width: 100%;
+padding: 10px;
+background: #3498db;
+color: white;
+border: none;
+border-radius: 6px;
+cursor: pointer;
+margin-top: 8px;
+}
+@media (max-width: 768px) {
+.products-grid {
+grid-template-columns: 1fr;
+}
+.admin-panel {
+width: 100%;
+left: -100%;
+}
+.header h1 {
+font-size: 32px;
+}
+.emoji-picker {
+grid-template-columns: repeat(6, 1fr);
+}
+}
+</style>
+</head>
+<body>
+<div class="overlay" id="overlay"></div>
+<div class="modal" id="productModal">
+<h3 id="modalTitle">Add New Product</h3>
+<div class="form-group">
+<label>Product Name</label>
+<input type="text" id="productName" placeholder="e.g., Cloud Chaser Pro">
+</div>
+<div class="form-group">
+<label>Price ($)</label>
+<input type="number" id="productPrice" placeholder="29.99" step="0.01">
+</div>
+<div class="form-group">
+<label>Product Image</label>
+<div class="image-choice-buttons">
+<button class="choice-btn active" onclick="selectImageType('emoji')">Use Emoji</button>
+<button class="choice-btn" onclick="selectImageType('upload')">Upload Image</button>
+</div>
+<div id="emojiSection" class="image-upload-section">
+<div class="emoji-picker" id="emojiPicker"></div>
+</div>
+<div id="uploadSection" class="image-upload-section" style="display: none;">
+<input type="file" id="imageUpload" accept="image/*" onchange="handleImageUpload(event)">
+<div class="image-upload-area" id="uploadArea" onclick="document.getElementById('imageUpload').click()">
+<div class="upload-icon">📷</div>
+<div class="upload-text">Click to upload product image<br>(JPG, PNG, max 2MB)</div>
+</div>
+<img id="imagePreview" class="image-preview" style="display: none;">
+</div>
+</div>
+<div class="form-group">
+<label>Flavors</label>
+<div class="flavors-input-list" id="flavorsInputList"></div>
+<button class="add-flavor-input" onclick="addFlavorInput()">+ Add Flavor</button>
+</div>
+<div class="modal-actions">
+<button class="modal-btn secondary" onclick="closeModal()">Cancel</button>
+<button class="modal-btn primary" onclick="saveProduct()">Save Product</button>
+</div>
+</div>
+<div class="modal" id="flavorModal">
+<h3>Add New Flavor</h3>
+<div class="form-group">
+<label>Flavor Name</label>
+<input type="text" id="newFlavorName" placeholder="e.g., Strawberry">
+</div>
+<div class="modal-actions">
+<button class="modal-btn secondary" onclick="closeFlavorModal()">Cancel</button>
+<button class="modal-btn primary" onclick="saveNewFlavor()">Add Flavor</button>
+</div>
+</div>
+<div class="admin-panel" id="adminPanel">
+<div class="admin-header">
+<h2>🔧 Admin Panel</h2>
+<button class="close-admin" onclick="toggleAdmin()">Close</button>
+</div>
+<div class="admin-actions">
+<button class="add-product-btn" onclick="openAddProductModal()">+ Add New Product</button>
+</div>
+<div id="adminContent"></div>
+</div>
+<div class="container">
+<div class="install-prompt" id="installPrompt">
+<h3>📱 Install This App</h3>
+<p>Install this menu as an app for permanent data storage and offline access!</p>
+<button class="install-btn" id="installButton">Install Now</button>
+<button class="dismiss-btn" onclick="dismissInstall()">Maybe Later</button>
+</div>
+<div class="header">
+<h1>🌬️ Vape Shop Menu</h1>
+<p>Select your favorite flavor</p>
+<button class="admin-toggle" onclick="toggleAdmin()">Admin</button>
+</div>
+<div class="products-grid" id="productsGrid"></div>
+</div>
+<script>
+const initialProducts = [
+{
+id: 1,
+name: "Cloud Chaser Pro",
+price: 29.99,
+imageType: "emoji",
+imageData: "💨",
+flavors: [
+{ id: 1, name: "Mango Ice", inStock: true },
+{ id: 2, name: "Blueberry", inStock: true },
+{ id: 3, name: "Mint", inStock: false },
+{ id: 4, name: "Watermelon", inStock: true },
+{ id: 5, name: "Strawberry", inStock: true },
+{ id: 6, name: "Grape", inStock: true }
+]
+},
+{
+id: 2,
+name: "Smooth Vape X",
+price: 24.99,
+imageType: "emoji",
+imageData: "✨",
+flavors: [
+{ id: 7, name: "Vanilla Cream", inStock: true },
+{ id: 8, name: "Caramel", inStock: true },
+{ id: 9, name: "Chocolate", inStock: false },
+{ id: 10, name: "Coffee", inStock: true },
+{ id: 11, name: "Hazelnut", inStock: true }
+]
+},
+{
+id: 3,
+name: "Fruit Blast Plus",
+price: 27.99,
+imageType: "emoji",
+imageData: "🍓",
+flavors: [
+{ id: 12, name: "Mixed Berry", inStock: true },
+{ id: 13, name: "Tropical Punch", inStock: true },
+{ id: 14, name: "Peach", inStock: true },
+{ id: 15, name: "Apple", inStock: false },
+{ id: 16, name: "Cherry", inStock: true },
+{ id: 17, name: "Lemon", inStock: true }
+]
+},
+{
+id: 4,
+name: "Ice Breaker Elite",
+price: 32.99,
+imageType: "emoji",
+imageData: "❄️",
+flavors: [
+{ id: 18, name: "Arctic Blast", inStock: true },
+{ id: 19, name: "Polar Mint", inStock: true },
+{ id: 20, name: "Cool Cucumber", inStock: false },
+{ id: 21, name: "Icy Grape", inStock: true },
+{ id: 22, name: "Frozen Berry", inStock: true }
+]
+}
+];
+
+const emojiOptions = ['💨', '✨', '🍓', '❄️', '🔥', '🌟', '⚡', '🌈', '💎', '🎯', '🚀', '🎨', '🍃', '☁️', '🌊', '🍒'];
+
+// Safe localStorage wrapper
+function safeLocalStorageGet(key, fallback) {
+    try {
+        const item = localStorage.getItem(key);
+        return item ? JSON.parse(item) : fallback;
+    } catch (e) {
+        console.warn("localStorage read failed, using fallback", e);
+        return fallback;
+    }
+}
+
+function safeLocalStorageSet(key, value) {
+    try {
+        localStorage.setItem(key, JSON.stringify(value));
+        return true;
+    } catch (e) {
+        console.error("Failed to save to localStorage", e);
+        alert("⚠️ Warning: Your device may not support saving data. Changes might be lost when you close the browser.");
+        return false;
+    }
+}
+
+// Load products safely
+let products = safeLocalStorageGet('vapeProducts', initialProducts);
+
+// Initialize selections (not persisted — only product data is)
+let selections = {};
+function initializeSelections() {
+    selections = {};
+    products.forEach(product => {
+        selections[product.id] = {
+            flavor: null,
+            quantity: 1
+        };
+    });
+}
+initializeSelections();
+
+// Save products with error feedback
+function saveProducts() {
+    if (!safeLocalStorageSet('vapeProducts', products)) {
+        // Optional: show warning in UI
+    }
+}
+
+function getNextId() {
+    const maxId = products.reduce((max, p) => Math.max(max, p.id), 0);
+    return maxId + 1;
+}
+
+function getNextFlavorId() {
+    let maxId = 0;
+    products.forEach(product => {
+        product.flavors.forEach(flavor => {
+            maxId = Math.max(maxId, flavor.id);
+        });
+    });
+    return maxId + 1;
+}
+
+function renderProductImage(product) {
+    if (product.imageType === 'image' && product.imageData) {
+        return `<img src="${product.imageData}" alt="${product.name}">`;
+    } else {
+        return `<span class="product-image-emoji">${product.imageData || '📦'}</span>`;
+    }
+}
+
+function renderAdminProductImage(product) {
+    if (product.imageType === 'image' && product.imageData) {
+        return `<span class="admin-product-image"><img src="${product.imageData}" alt="${product.name}"></span>`;
+    } else {
+        return `<span class="admin-product-image"><span class="admin-product-image-emoji">${product.imageData || '📦'}</span></span>`;
+    }
+}
+
+function renderProducts() {
+    const grid = document.getElementById('productsGrid');
+    grid.innerHTML = products.map(product => {
+        const selection = selections[product.id];
+        return `
+<div class="product-card">
+<div class="product-image">${renderProductImage(product)}</div>
+<div class="product-info">
+<div class="product-name">${product.name}</div>
+<div class="product-price">$${product.price.toFixed(2)}</div>
+</div>
+<div class="flavors-section">
+<div class="flavors-label">Available Flavors:</div>
+<div class="flavors-grid">
+${product.flavors.map(flavor => `
+<button
+class="flavor-btn ${!flavor.inStock ? 'out-of-stock' : ''} ${selection.flavor === flavor.id ? 'selected' : ''}"
+onclick="selectFlavor(${product.id}, ${flavor.id})"
+${!flavor.inStock ? 'disabled' : ''}
+>
+${flavor.name}
+</button>
+`).join('')}
+</div>
+</div>
+<div class="quantity-section">
+<div class="quantity-label">Quantity:</div>
+<div class="quantity-controls">
+<button class="qty-btn" onclick="changeQuantity(${product.id}, -1)" ${selection.quantity <= 1 ? 'disabled' : ''}>−</button>
+<div class="qty-display">${selection.quantity}</div>
+<button class="qty-btn" onclick="changeQuantity(${product.id}, 1)" ${selection.quantity >= 10 ? 'disabled' : ''}>+</button>
+</div>
+</div>
+</div>
+`;
+    }).join('');
+}
+
+function selectFlavor(productId, flavorId) {
+    selections[productId].flavor = flavorId;
+    renderProducts();
+}
+
+function changeQuantity(productId, delta) {
+    const newQty = selections[productId].quantity + delta;
+    if (newQty >= 1 && newQty <= 10) {
+        selections[productId].quantity = newQty;
+        renderProducts();
+    }
+}
+
+function toggleAdmin() {
+    const panel = document.getElementById('adminPanel');
+    const overlay = document.getElementById('overlay');
+    panel.classList.toggle('open');
+    overlay.classList.toggle('active');
+    if (panel.classList.contains('open')) {
+        renderAdmin();
+    }
+}
+
+function renderAdmin() {
+    const content = document.getElementById('adminContent');
+    content.innerHTML = products.map(product => `
+<div class="admin-product">
+<button class="delete-product-btn" onclick="deleteProduct(${product.id})">Delete</button>
+<h3>${renderAdminProductImage(product)} ${product.name} - $${product.price.toFixed(2)}</h3>
+${product.flavors.map(flavor => `
+<div class="admin-flavor">
+<span>${flavor.name}</span>
+<div class="flavor-actions">
+<button
+class="stock-toggle ${flavor.inStock ? 'in-stock' : 'out-of-stock'}"
+onclick="toggleStock(${product.id}, ${flavor.id})"
+>
+${flavor.inStock ? '✓ In Stock' : '✗ Out of Stock'}
+</button>
+<button class="delete-flavor-btn" onclick="deleteFlavor(${product.id}, ${flavor.id})">Delete</button>
+</div>
+</div>
+`).join('')}
+<button class="add-flavor-btn" onclick="openAddFlavorModal(${product.id})">+ Add Flavor</button>
+</div>
+`).join('');
+}
+
+function toggleStock(productId, flavorId) {
+    const product = products.find(p => p.id === productId);
+    const flavor = product.flavors.find(f => f.id === flavorId);
+    flavor.inStock = !flavor.inStock;
+    saveProducts();
+    renderAdmin();
+    renderProducts();
+}
+
+function deleteProduct(productId) {
+    if (confirm('Are you sure you want to delete this product?')) {
+        products = products.filter(p => p.id !== productId);
+        delete selections[productId];
+        saveProducts();
+        renderAdmin();
+        renderProducts();
+    }
+}
+
+function deleteFlavor(productId, flavorId) {
+    const product = products.find(p => p.id === productId);
+    if (product.flavors.length <= 1) {
+        alert('Cannot delete the last flavor. A product must have at least one flavor.');
+        return;
+    }
+    if (confirm('Are you sure you want to delete this flavor?')) {
+        product.flavors = product.flavors.filter(f => f.id !== flavorId);
+        saveProducts();
+        renderAdmin();
+        renderProducts();
+    }
+}
+
+function selectImageType(type) {
+    currentImageType = type;
+    const buttons = document.querySelectorAll('.choice-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    if (type === 'emoji') {
+        document.getElementById('emojiSection').style.display = 'block';
+        document.getElementById('uploadSection').style.display = 'none';
+    } else {
+        document.getElementById('emojiSection').style.display = 'none';
+        document.getElementById('uploadSection').style.display = 'block';
+    }
+}
+
+function handleImageUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    if (file.size > 2 * 1024 * 1024) {
+        alert('Image size must be less than 2MB');
+        return;
+    }
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        selectedImage = e.target.result;
+        const preview = document.getElementById('imagePreview');
+        const uploadArea = document.getElementById('uploadArea');
+        preview.src = selectedImage;
+        preview.style.display = 'block';
+        uploadArea.classList.add('has-image');
+        uploadArea.innerHTML = '';
+        uploadArea.appendChild(preview);
+    };
+    reader.readAsDataURL(file);
+}
+
+let editingProductId = null;
+let addingFlavorToProductId = null;
+let selectedEmoji = '';
+let selectedImage = null;
+let currentImageType = 'emoji';
+let flavorInputs = [];
+
+function openAddProductModal() {
+    editingProductId = null;
+    document.getElementById('modalTitle').textContent = 'Add New Product';
+    document.getElementById('productName').value = '';
+    document.getElementById('productPrice').value = '';
+    selectedEmoji = emojiOptions[0];
+    selectedImage = null;
+    currentImageType = 'emoji';
+    flavorInputs = [''];
+    document.querySelectorAll('.choice-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.choice-btn')[0].classList.add('active');
+    document.getElementById('emojiSection').style.display = 'block';
+    document.getElementById('uploadSection').style.display = 'none';
+    const uploadArea = document.getElementById('uploadArea');
+    uploadArea.classList.remove('has-image');
+    uploadArea.innerHTML = `
+<div class="upload-icon">📷</div>
+<div class="upload-text">Click to upload product image<br>(JPG, PNG, max 2MB)</div>
+`;
+    document.getElementById('imagePreview').style.display = 'none';
+    document.getElementById('imageUpload').value = '';
+    renderEmojiPicker();
+    renderFlavorInputs();
+    document.getElementById('productModal').classList.add('active');
+    document.getElementById('overlay').classList.add('active');
+}
+
+function renderEmojiPicker() {
+    const picker = document.getElementById('emojiPicker');
+    picker.innerHTML = emojiOptions.map(emoji => `
+<div class="emoji-option ${emoji === selectedEmoji ? 'selected' : ''}" onclick="selectEmoji('${emoji}')">
+${emoji}
+</div>
+`).join('');
+}
+
+function selectEmoji(emoji) {
+    selectedEmoji = emoji;
+    renderEmojiPicker();
+}
+
+function renderFlavorInputs() {
+    const list = document.getElementById('flavorsInputList');
+    list.innerHTML = flavorInputs.map((flavor, index) => `
+<div class="flavor-input-row">
+<input type="text" value="${flavor}" onchange="updateFlavorInput(${index}, this.value)" placeholder="Flavor name">
+${flavorInputs.length > 1 ? `<button class="remove-flavor-input" onclick="removeFlavorInput(${index})">✕</button>` : ''}
+</div>
+`).join('');
+}
+
+function updateFlavorInput(index, value) {
+    flavorInputs[index] = value;
+}
+
+function addFlavorInput() {
+    flavorInputs.push('');
+    renderFlavorInputs();
+}
+
+function removeFlavorInput(index) {
+    flavorInputs.splice(index, 1);
+    renderFlavorInputs();
+}
+
+function saveProduct() {
+    const name = document.getElementById('productName').value.trim();
+    const price = parseFloat(document.getElementById('productPrice').value);
+    if (!name || !price || price <= 0) {
+        alert('Please fill in all fields with valid values');
+        return;
+    }
+    const validFlavors = flavorInputs.filter(f => f.trim() !== '');
+    if (validFlavors.length === 0) {
+        alert('Please add at least one flavor');
+        return;
+    }
+    let imageData, imageType;
+    if (currentImageType === 'emoji') {
+        imageData = selectedEmoji;
+        imageType = 'emoji';
+    } else {
+        if (!selectedImage) {
+            alert('Please upload an image or select an emoji');
+            return;
+        }
+        imageData = selectedImage;
+        imageType = 'image';
+    }
+    const newProduct = {
+        id: getNextId(),
+        name: name,
+        price: price,
+        imageType: imageType,
+        imageData: imageData,
+        flavors: validFlavors.map((flavorName, index) => ({
+            id: getNextFlavorId() + index,
+            name: flavorName.trim(),
+            inStock: true
+        }))
+    };
+    products.push(newProduct);
+    selections[newProduct.id] = { flavor: null, quantity: 1 };
+    saveProducts();
+    closeModal();
+    renderAdmin();
+    renderProducts();
+}
+
+function closeModal() {
+    document.getElementById('productModal').classList.remove('active');
+    document.getElementById('overlay').classList.remove('active');
+}
+
+function openAddFlavorModal(productId) {
+    addingFlavorToProductId = productId;
+    document.getElementById('newFlavorName').value = '';
+    document.getElementById('flavorModal').classList.add('active');
+    document.getElementById('overlay').classList.add('active');
+}
+
+function saveNewFlavor() {
+    const flavorName = document.getElementById('newFlavorName').value.trim();
+    if (!flavorName) {
+        alert('Please enter a flavor name');
+        return;
+    }
+    const product = products.find(p => p.id === addingFlavorToProductId);
+    product.flavors.push({
+        id: getNextFlavorId(),
+        name: flavorName,
+        inStock: true
+    });
+    saveProducts();
+    closeFlavorModal();
+    renderAdmin();
+    renderProducts();
+}
+
+function closeFlavorModal() {
+    document.getElementById('flavorModal').classList.remove('active');
+    document.getElementById('overlay').classList.remove('active');
+    addingFlavorToProductId = null;
+}
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    document.getElementById('installPrompt').classList.add('show');
+});
+
+let deferredPrompt = null;
+
+document.getElementById('installButton').addEventListener('click', async () => {
+    if (!deferredPrompt) {
+        return;
+    }
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    deferredPrompt = null;
+    document.getElementById('installPrompt').classList.remove('show');
+});
+
+function dismissInstall() {
+    document.getElementById('installPrompt').classList.remove('show');
+}
+
+document.getElementById('overlay').addEventListener('click', function() {
+    if (document.getElementById('adminPanel').classList.contains('open')) {
+        toggleAdmin();
+    } else {
+        closeModal();
+        closeFlavorModal();
+    }
+});
+
+// Ensure we always have data
+if (products.length === 0) {
+    products = initialProducts;
+    saveProducts();
+    initializeSelections();
+}
+
+renderProducts();
+</script>
+</body>
+</html>
+
+
+
+              <script>
+                              let products = JSON.parse(localStorage.getItem('vapeProducts')) || initialProducts;
+
+
+              </script>
+                        </body>
+                        </html>
+                    
